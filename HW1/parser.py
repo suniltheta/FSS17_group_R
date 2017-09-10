@@ -38,16 +38,16 @@ def tokenize_row(list = []):
 
 def main(file_name):
     if not os.path.exists(file_name):
-        print("File {} does not exist in current path".format(file_name))
+        print("File {} does not exist in current path\n".format(file_name))
         return
-    print("File {} exist in current path".format(file_name))
+    print("File {} exist in current path\n".format(file_name))
     first = True
     for line in open(file_name):  # POM3A.csv file.csv
         if first:
             first = False
             first_row_list = line.split(',')
             tokenize_first_row(first_row_list)
-            print(first_row)
+            print("{}\n".format(first_row))
         else:
             # all_rows.append(line.split('#')[0].split(','))
             all_rows.append(line.split('#')[0])
@@ -72,7 +72,10 @@ def main(file_name):
             tokenize_row(item.get("current").split(',') + item.get("next").split(','))
         prev_key = key
 
-    print(result)
+    # print(result)
+    for key in result.keys():
+        print("{}:\t{}\n".format(key, result.get(key)))
+        
 
 
 if __name__ == "__main__":
