@@ -54,13 +54,18 @@ def main(file_name):
             all_rows.append(line.split('#')[0])
 
     weird_rows = {}
+    skip_next = False
     l = len(all_rows)
 
     for index, row in enumerate(all_rows):
         row = row.strip()
+        if skip_next:
+            skip_next = False
+            continue
         if row == '' or len(row) == 0 :
             continue
         if row[-1] == ',':
+            skip_next = True
             if index < (l - 1):
                 weird_rows[index] = {"current": row, "next": all_rows[index + 1]}
         else:
