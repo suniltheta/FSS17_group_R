@@ -48,7 +48,7 @@ def main(file_name):
             first = False
             first_row_list = line.split(',')
             tokenize_first_row(first_row_list)
-            #print("{}\n".format(first_row))
+            print("{}\n".format(first_row))
         else:
             # all_rows.append(line.split('#')[0].split(','))
             all_rows.append(line.split('#')[0])
