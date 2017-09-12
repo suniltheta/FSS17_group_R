@@ -22,7 +22,7 @@ class Sym:
             self.mode = self.mode or x
             self._ent = None
             self.n = self.n + 1
-            if not self.counts[x]:
+            if not self.counts.get(x):
                 self.nk = self.nk + 1
                 self.counts[x] = 0
             seen = self.counts[x] + 1
