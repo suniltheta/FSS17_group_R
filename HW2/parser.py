@@ -1,5 +1,6 @@
 import sys
 import os.path
+from tbl import Tbl
 
 first_row = []
 all_rows = []
