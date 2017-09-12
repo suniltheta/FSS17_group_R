@@ -47,7 +47,7 @@ def main(file_name):
             first = False
             first_row_list = line.split(',')
             tokenize_first_row(first_row_list)
-            print("{}\n".format(first_row))
+            #print("{}\n".format(first_row))
         else:
             # all_rows.append(line.split('#')[0].split(','))
             all_rows.append(line.split('#')[0])
@@ -73,8 +73,27 @@ def main(file_name):
         prev_key = key
 
     # print(result)
-    for key in result.keys():
-        print("{}:\t{}\n".format(key, result.get(key)))
+    #for key in result.keys():
+    #    print("{}:\t{}\n".format(key, result.get(key)))
+    tbl = Tbl()
+    tbl.consume(result)
+    tbl.calculate_dom()
+    my_list = tbl.get_ret()
+    sorted_my_list = sorted(my_list, key=lambda k: k['dom_val'], reverse=True)
+
+
+    if len(sorted_my_list) > 10:
+        print("Top 5 dominating items\n")
+        for item in sorted_my_list[:5]:
+            print(item.get('val').cells)
+
+        print("\n\nLast 5 dominating items\n")
+        for item in sorted_my_list[-5:]:
+            print(item.get('val').cells)
+    else:
+        print("\n\nItems in sorted list\n")
+        for item in sorted_my_list:
+            print(item.get('val').cells)
         
 
 
