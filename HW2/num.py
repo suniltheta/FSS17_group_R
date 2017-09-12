@@ -10,8 +10,8 @@ class Numb:
         self.mu = 0
         self.m2 = 0
         self.sd = 0
-        self.hi = 1e32
-        self.lo = -1e32
+        self.hi = -1e32
+        self.lo = 1e32
         self.w = 1
         self.pos = po
         self.weight = 0
