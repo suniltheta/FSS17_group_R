@@ -1,23 +1,33 @@
 import sys
 import os.path
 from tbl import Tbl
+import time
 
 first_row = []
+first_row_type = []
 all_rows = []
+bad_row = []
 result = {}
 
 def tokenize_first_row(list = []):
     for item in list:
         item = item.strip()
         if not item[0] == '?':
+            if item[0] == '$' or item[0] == '%' or item[0] == '>' or item[0] == '<':
+                first_row_type.append(1.0)
+            elif item[0] == '!':
+                first_row_type.append("str")
+            else:
+                first_row_type.append("str")
             first_row.append(item)
             result[item] = []
         else:
-            first_row.append(False)
+            first_row_type.append(False)
 
 
 def tokenize_row(list = []):
     skips = 0
+    temp_result = []
     for i, item in enumerate(list):
         item = item.strip()
         if item == '':
@@ -26,6 +36,9 @@ def tokenize_row(list = []):
         try:
             val = float(item)
         except ValueError:
+            if first_row_type[i] == 1.0:
+                bad_row.append(list)
+                return
             if item == 'True' or item == 'true' or item == 'TRUE' or item == 't' or item == 'T':
                 val = True
             elif item == 'False' or item == 'false' or item == 'FALSE' or item == 'f' or item == 'F':
@@ -33,8 +46,13 @@ def tokenize_row(list = []):
             else:
                 val = item
         index = i - skips
-        if first_row[index] and index < len(first_row):
-            result[first_row[index]].append(val)
+        # if first_row[index] and index < len(first_row):
+        #     result[first_row[index]].append(val)
+        if first_row_type[index] and index < len(first_row_type):
+            temp_result.append(val)
+
+    for i in range(len(temp_result)):
+        result[first_row[i]].append(temp_result[i])
 
 
 def main(file_name):
@@ -78,9 +96,10 @@ def main(file_name):
             tokenize_row(item.get("current").split(',') + item.get("next").split(','))
         prev_key = key
 
-    # print(result)
-    #for key in result.keys():
-    #    print("{}:\t{}\n".format(key, result.get(key)))
+#     temp_result = result
+#     for key in result.keys():
+#         print("{}:\t{}\n".format(key, result.get(key)))
+
     tbl = Tbl()
     tbl.consume(result)
     tbl.calculate_dom()
@@ -100,8 +119,6 @@ def main(file_name):
         print("\n\nItems in sorted list\n")
         for item in sorted_my_list:
             print(item.get('val').cells)
-        
-
 
 if __name__ == "__main__":
     #main("test.csv")
@@ -109,6 +126,3 @@ if __name__ == "__main__":
          main(sys.argv[1])
     else:
          print("Please enter the .csv file name")
-
-
-
