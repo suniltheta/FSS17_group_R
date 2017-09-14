@@ -1,6 +1,5 @@
 import sys
 import os.path
-from tbl import Tbl
 import time
 
 first_row = []
