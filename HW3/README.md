@@ -5,7 +5,5 @@ Need Python 3
 
 `$ cd FSS17_group_R`
 
-After this step place your .csv file in HW1 folder
-
-`$ python3 HW2/parser.py <file_name>`
+`$ python3 HW3/superrangetest.py`
 
