@@ -32,13 +32,14 @@ class Numb:
             if self.n > 1:
                 self.sd = (self.m2 / (self.n - 1)) ** 0.5
 
-    def updates(self, items, f=None):
+    def updates(self, items, f=None, all=None):
+        all = all or Numb()
         def fun(x):
             return x
         f = f or fun
         for item in items:
-            self.update(f(item))
-        return self
+            all.update(f(item))
+        return all
 
     def norm(self, x):
         if x == the.ignore:
