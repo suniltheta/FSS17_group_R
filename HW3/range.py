@@ -37,41 +37,41 @@ class Range:
             self.span = self.hi - self.lo
         return x
 
-def nextRange(i):
-    i.now = Range()
-    if not i.ranges:
-        i.ranges = []
-    i.ranges.append(i.now)
+    def nextRange(self, i):
+        i.now = Range()
+        if not i.ranges:
+            i.ranges = []
+        i.ranges.append(i.now)
 
-def rangeManager(t, x):
-    _ = _class(x, t)
-    nextRange(_)
-    numb = Numb()
-    _.num = numb.updates(t, _.x)
-    _.hi = _.num.hi
-    _.enough = _.size ** _.m
-    _.epsilon = _.num.sd * _.cohen
-    return _
+    def rangeManager(self, t, x):
+        _ = _class(x, t)
+        self.nextRange(_)
+        numb = Numb()
+        _.num = numb.updates(t, _.x)
+        _.hi = _.num.hi
+        _.enough = _.size ** _.m
+        _.epsilon = _.num.sd * _.cohen
+        return _
 
+    def function(self, t, xi, last=0):
+        def temp(p):
+            return p
 
+        x = xi or temp
+        t = sorted(t, key=lambda k: k != the.ignore and x(k))
+        i = self.rangeManager(t, x)
 
-def rangefunction(t, xi, last=0):
-    def temp(p):
-        return p
-    x = xi or temp
-    t = sorted(t, key=lambda k: k != the.ignore and x(k))
-    i = rangeManager(t, x)
+        for j, one in enumerate(t):
+            x1 = x(one)
+            if x1 != the.ignore:
 
-    for j, one in enumerate(t):
-        x1 = x(one)
-        if x1 != the.ignore:
+                if j > 0 and x1 > last and i.now.n > i.enough and i.now.span > i.epsilon and x1 - i.now.hi > i.epsilon:
+                    # if j > 0 and x1 > last and i.now.n > i.enough and i.now.span > i.epsilon and x1 - i.now.hi > i.epsilon:
+                    self.nextRange(i)
+                if i.now.n - j > i.enough:
+                    ooo = 10
+                i.now.update(one, x1)
+                last = x1
+        return i.ranges
 
-            if j > 0 and x1 > last and i.now.n > i.enough and i.now.span > i.epsilon and x1 - i.now.hi > i.epsilon:
-            # if j > 0 and x1 > last and i.now.n > i.enough and i.now.span > i.epsilon and x1 - i.now.hi > i.epsilon:
-                nextRange(i)
-            if i.now.n - j > i.enough:
-                ooo = 10
-            i.now.update(one, x1)
-            last = x1
-    return i.ranges
 
