@@ -2,15 +2,14 @@ import random
 from myrandom import Myrandom
 from num import Numb
 from range import Range
-from range import rangefunction
 # import range
-# from superrange import Superrange
+from superrange import Superrange
 import config
 
 the = config
 R = Myrandom()
 RANGE = Range()
-# SUPER = Superrange()
+SUPER = Superrange()
 
 def x(z):
     return z[0]
@@ -40,11 +39,11 @@ def main():
         t.append([w, kla])
 
     print("{}".format("\nWe have many unsupervised ranges."))
-    for j, one in enumerate(rangefunction(t, x)):
-        print(" x\t{} [span:{} lo:{} n:{} hi:{}]".format(j, one.span, one.lo, one.n, one.hi))
-
+    for j, one in enumerate(RANGE.function(t, x)):
+        print(" x\t{} [span={} lo={} n={} hi={}]".format(j, one.span, one.lo, one.n, one.hi))
     print("{}".format("\nWe have fewer supervised ranges."))
-
+    for j, one in enumerate(SUPER.function(t, x, y)):
+        print(" super\t{} [label={} most={} ]".format(j, one.label, one.most))
     pass
 
 
