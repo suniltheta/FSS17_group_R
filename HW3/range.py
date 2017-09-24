@@ -65,7 +65,7 @@ class Range:
             x1 = x(one)
             if x1 != the.ignore:
 
-                if j > 0 and x1 > last and i.now.n > i.enough and i.now.span > i.epsilon and i.num.hi - x1> i.epsilon and i.num.n - j > i.enough::
+                if j > 0 and x1 > last and i.now.n > i.enough and i.now.span > i.epsilon and i.num.hi - x1> i.epsilon and i.num.n - j > i.enough:
                     self.nextRange(i)
                 i.now.update(one, x1)
                 last = x1
