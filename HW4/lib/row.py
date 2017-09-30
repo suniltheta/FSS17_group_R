@@ -1,26 +1,26 @@
 import math
 import config
+import copy
 
+from id import ID
 from sym import Sym
 from num import Numb
 
 the = config
 
-
-def new_id():
-    id = id + 1
-    return id
-
 class Row:
-    def __init__(self, id):
-        self.id = id
+    def __init__(self):
+        self.id =  id(self) #ID.new()
         self.cells = []
 
-    def update(self, cells):
-        self.cells = cells
-
-    # def create(self):
-    #     self.id = new_id()
+    def update(self, cells, t=False):
+        if not t:
+            self.cells = cells
+            return
+        self.cells = copy.deepcopy(cells)
+        for head in t.all.cols:
+            head.what.update(cells[head.pos])
+        return self
 
     def dominate1(self, row, t):
         e, n = 2.71828, len(t.goals)
@@ -31,7 +31,7 @@ class Row:
             y = goal.norm(row.cells[goal.pos])
             sum1 = sum1 - e ** (w * (x - y) / n)
             sum2 = sum2 - e ** (w * (y - x) / n)
-        return sum1/n < sum2/n
+        return sum1/(n + 1e-32) < sum2/(n + 1e-32)
 
     def dominate(self, t, f=None):
         f = f or self.dominate1
@@ -41,6 +41,12 @@ class Row:
                 if f(row, t):
                     tmp = tmp + 1
         return tmp
+
+    def __str__(self):
+        s=""
+        for x in self.cells:
+            s = s +", "+ str(x)
+        return s
 
 
 if __name__ == "__main__":

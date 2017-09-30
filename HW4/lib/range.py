@@ -64,10 +64,10 @@ class Range:
         for j, one in enumerate(t):
             x1 = x(one)
             if x1 != the.ignore:
-
+                i.now.update(one, x1)
                 if j > 0 and x1 > last and i.now.n > i.enough and i.now.span > i.epsilon and i.num.hi - x1> i.epsilon and i.num.n - j > i.enough:
                     self.nextRange(i)
-                i.now.update(one, x1)
+                # i.now.update(one, x1)
                 last = x1
         return i.ranges
 

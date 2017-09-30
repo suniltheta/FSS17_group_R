@@ -22,6 +22,7 @@ def tokenize_first_row(list = []):
             first_row.append(item)
             result[item] = []
         else:
+            # first_row.append(False)
             first_row_type.append(False)
 
 
@@ -49,6 +50,7 @@ def tokenize_row(list = []):
         # if first_row[index] and index < len(first_row):
         #     result[first_row[index]].append(val)
         if first_row_type[index] and index < len(first_row_type):
+            # result[first_row[index]].append(val)
             temp_result.append(val)
 
     for i in range(len(temp_result)):
@@ -56,6 +58,7 @@ def tokenize_row(list = []):
 
 
 def main(file_name):
+    file_name = "../data/" + file_name
     if not os.path.exists(file_name):
         print("File {} does not exist in current path\n".format(file_name))
         return
@@ -96,10 +99,11 @@ def main(file_name):
             tokenize_row(item.get("current").split(',') + item.get("next").split(','))
         prev_key = key
 
-#     temp_result = result
-#     for key in result.keys():
-#         print("{}:\t{}\n".format(key, result.get(key)))
+    temp_result = result
+    for key in result.keys():
+        print("{}:\t{}\n".format(key, result.get(key)))
 
+    print(result)
     tbl = Tbl()
     tbl.consume(result)
     tbl.calculate_dom()
@@ -121,8 +125,9 @@ def main(file_name):
             print(item.get('val').cells)
 
 if __name__ == "__main__":
-    #main("test.csv")
-    if len(sys.argv) > 1:
-         main(sys.argv[1])
-    else:
-         print("Please enter the .csv file name")
+    main("auto.csv")
+    # if len(sys.argv) > 1:
+    #      main(sys.argv[1])
+    # else:
+    #      print("Please enter the .csv file name")
+

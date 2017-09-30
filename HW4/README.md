@@ -5,8 +5,7 @@ Need Python 3
 
 `$ cd FSS17_group_R`
 
-`$ python3 HW3/superrangetest.py`
-
+`$ python3 HW4/lib/sdtree.py auto.csv`
 
 
 ![ref](https://github.com/lualure/src/)

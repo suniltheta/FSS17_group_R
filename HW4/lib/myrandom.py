@@ -26,7 +26,7 @@ class Myrandom:
     def another(self):
         if self.randomtable == None:
             self.randomtable = {}
-            for i in range(1, 97):
+            for i in range(1, 98):
                 self.randomtable[i] = self.park_miller_randomizer()
         x = self.park_miller_randomizer()
         i = 1 + math.floor(97 * x)

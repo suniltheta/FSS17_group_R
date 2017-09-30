@@ -77,7 +77,7 @@ class Superrange:
         what = self.nump and Numb() or Sym()
         z = self.nump and self.sd or self.ent
         breaks = {}
-        ranges = Range().function(things, x)
+        ranges = [0] + Range().function(things, x)
 
         def data(j):
             return ranges[j]._all._all
@@ -121,5 +121,23 @@ class Superrange:
 
             return bin
 
-        combine(1, len(ranges)-1, memo(0, len(ranges)-1, {}), 1, 0)
+        combine(1, len(ranges)-1, memo(1, len(ranges)-1, {}), 1, 0)
         return self.labels(breaks)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

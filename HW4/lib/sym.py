@@ -10,18 +10,29 @@ class Sym:
         self.nk = 0
         self.counts = {}
         self.most = 0
-        self.mode = None
+        self.mode = ""
         self._ent = None
         self.pos = po
+        self.syms = 0
+        self.txt = ""
+        self.bins = None
 
     def pos(self, val):
         self.pos = val
+
+    def about(self):
+        syms = 0
+        for _, __ in enumerate(self.counts):
+            syms = syms + 1
+        self.syms = syms
+        return [[self.pos], [self.txt], [self.n], [self.mode], [self.most], [self.syms]]
 
     def update(self, x):
         if x != the.ignore:
             self.mode = self.mode or x
             self._ent = None
             self.n = self.n + 1
+            self.data.append(x)
             if not self.counts.get(x):
                 self.nk = self.nk + 1
                 self.counts[x] = 0
@@ -48,6 +59,18 @@ class Sym:
         elif j == k:
             return 0, 1
         return 1, 1
+
+    def discretize(self, x):
+        r = None
+        if x == the.ignore:
+            return x
+        if not self.bins:
+            return x
+        for b in self.bins:
+            r = b.label
+            if x < b.most:
+                break
+        return r
 
     def ent(self):
         if self._ent == None:
