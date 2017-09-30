@@ -185,7 +185,7 @@ def test(f, y):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        file_name = "../data/" + sys.argv[1]
+        file_name = the.data + sys.argv[1]
         if not os.path.exists(file_name):
             print("File {} does not exist in current path\n".format(file_name))
         else:
