@@ -18,13 +18,15 @@ class Mylists:
         else:
             return False
 
-    def first(self, x):
+    @staticmethod
+    def first(x):
         if type(x) is list and len(x) > 0:
             return x[0]
         else:
             return None
 
-    def last(self, x):
+    @staticmethod
+    def last(x):
         if type(x) is list and len(x) > 0:
             return x[-1]
         else:

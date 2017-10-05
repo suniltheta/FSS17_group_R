@@ -181,7 +181,6 @@ class Tbl:
 
         return j
 
-
     def show(self):
         def worker(t):
             if len(t) > 0:

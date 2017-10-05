@@ -66,42 +66,6 @@ class Sdtree:
                             here.grow1(yfun, rows1, lvl + 1, here.stats.sd, cut.pos, cut.what, val)
 
     @staticmethod
-    def grow21(above, yfun, rows, lvl, b4, pos, attr, val):
-        def pad():
-            return "%-20s".format("| " * lvl)
-        def likeAbove():
-            return above._t.copy(rows)
-
-        if len(rows) >= the.tree_min:
-            if lvl <= the.tree_maxDepth:
-                here = (lvl == 0) and above or Sdtree(likeAbove(), yfun, pos, attr, val)
-                if here.stats.sd < b4:
-                    if lvl > 0:
-                        above._kids.append(here)
-
-                    cuts = Sdtree.order(here._t, yfun)
-                    cut = cuts[0]
-                    kids = {}
-                    for r in rows:
-                        val = r.cells[cut.pos]
-                        if val != the.ignore:
-                            rows1 = kids.get(val) or []
-                            rows1.append(r)
-                            kids[val] = rows1
-                    for val in kids.keys():
-                        rows1 = kids.get(val)
-                        if len(rows1) < len(rows):
-                            above = Sdtree.grow1(here, yfun, rows1, lvl + 1, here.stats.sd, cut.pos, cut.what, val)
-        return above
-
-    # def grow(self, t, y):
-    #     # yfun = Tbl.yfun(y)(t) # TODO: Check if this also works
-    #     yfun = Tbl.dom(t)
-    #     root = Sdtree(t, yfun)
-    #     self.grow1(yfun, t.rows, 0, 10**32, None, None, None)
-    #     return root
-
-    @staticmethod
     def order(t, y):
         def xpect(col):
             tmp = 0
@@ -184,14 +148,13 @@ def test(f, y):
     # print(t2.spec)
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = the.data + sys.argv[1]
-        if not os.path.exists(file_name):
-            print("File {} does not exist in current path\n".format(file_name))
-        else:
-            print("File {} exist in current path\n".format(file_name))
-            test(sys.argv[1], "dom")
-    else:
-         print("Please enter the .csv file name which is present in /data subfolder")
-    # test("auto.csv", "dom")
-
+    # if len(sys.argv) > 1:
+    #     file_name = "../data/" + "auto.csv"#sys.argv[1]
+    #     if not os.path.exists(file_name):
+    #         print("File {} does not exist in current path\n".format(file_name))
+    #     else:
+    #         print("File {} exist in current path\n".format(file_name))
+    #         test(sys.argv[1], "dom")
+    # else:
+    #      print("Please enter the .csv file name which is present in /data subfolder")
+    test("auto.csv", "dom")
