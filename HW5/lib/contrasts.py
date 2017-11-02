@@ -131,6 +131,31 @@ class CON:
     @staticmethod
     def monitors(branches):
         return CON.contrasts(branches, less)
+    
+    @staticmethod
+    def generateContrast(x, branches):
+        if len(x._kids) == 0:
+            branches.append(x)
+            return
+        else:
+            for k in x._kids:
+                CON.generateContrast(k, branches)
+
+    @staticmethod
+    def contrastBranches(branches):
+        c = 0
+        for i, branch1 in enumerate(branches):
+            out = []
+            for j, branch2 in enumerate(branches[i+1:]):
+                if i != j:
+                    c = c + 1
+                    if branch1.stats.mu == branch2.stats.mu:
+                        print("{}.\t{}={} , {}={} are equal".format(c, branch1.attr, branch1.val, branch2.attr, branch2.val))
+                    elif branch1.stats.mu > branch2.stats.mu:
+                        print("{}.\t{}={} , {}={} is a plan".format(c, branch1.attr, branch1.val, branch2.attr, branch2.val))
+                    else:
+                        print("{}.\t{}={} , {}={} is a monitor".format(c, branch1.attr, branch1.val, branch2.attr, branch2.val))
+
 
 
 def test(f, y):
@@ -139,15 +164,20 @@ def test(f, y):
     f = f or "auto.csv"
     x = Sdtree.grow(Tbl(f).discretizeRows(y), "dom")
     Sdtree.show(x)
-    b = CON.branches(x)
+    branches = []
+    CON.generateContrast(x, branches)
     print("\n==================== Show branches \n\n")
-    for j, val in enumerate(b):
-        print(j, [x for x in val])
+    CON.contrastBranches(branches)
+
+    # b = CON.branches(x)
+    # print("\n==================== Show branches \n\n")
+    # for j, val in enumerate(b):
+    #     print(j, [x for x in val])
         # print(j, [str(x) for x in val])
-    print("\n==================== What to do: (plans= here to better) ")
-    CON.plans(b)
-    print("\n==================== What to fear: (monitors = here to worse) ")
-    CON.monitors(b)
+    # print("\n==================== What to do: (plans= here to better) ")
+    # CON.plans(b)
+    # print("\n==================== What to fear: (monitors = here to worse) ")
+    # CON.monitors(b)
 
 if __name__ == "__main__":
     # if len(sys.argv) > 1:
