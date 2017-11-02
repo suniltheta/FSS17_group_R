@@ -2,6 +2,7 @@ import math
 import copy
 import sys
 import os
+import random
 import config
 from mylists import Mylists
 from num import Numb
@@ -144,6 +145,9 @@ class CON:
     @staticmethod
     def contrastBranches(branches):
         c = 0
+        random.shuffle(branches)
+        plans = []
+        monitors = []
         for i, branch1 in enumerate(branches):
             out = []
             for j, branch2 in enumerate(branches[i+1:]):
@@ -152,9 +156,20 @@ class CON:
                     if branch1.stats.mu == branch2.stats.mu:
                         print("{}.\t{}={} , {}={} are equal".format(c, branch1.attr, branch1.val, branch2.attr, branch2.val))
                     elif branch1.stats.mu > branch2.stats.mu:
-                        print("{}.\t{}={} , {}={} is a plan".format(c, branch1.attr, branch1.val, branch2.attr, branch2.val))
+                        # print("{}.\t{}={} , {}={} is a plan".format(c, branch1.attr, branch1.val, branch2.attr, branch2.val))
+                        plans.append("{}={} , {}={}".format(branch1.attr, branch1.val, branch2.attr, branch2.val))
                     else:
-                        print("{}.\t{}={} , {}={} is a monitor".format(c, branch1.attr, branch1.val, branch2.attr, branch2.val))
+                        # print("{}.\t{}={} , {}={} is a monitor".format(c, branch1.attr, branch1.val, branch2.attr, branch2.val))
+                        monitors.append("{}={} , {}={}".format(branch1.attr, branch1.val, branch2.attr,
+                                                                             branch2.val))
+
+        print("\n==================== What to do: (plans= here to better) ")
+        for i, plan in enumerate(plans):
+            print("{}.\t{}".format(i, plan))
+
+        print("\n==================== What to fear: (monitors = here to worse) ")
+        for i, monitor in enumerate(monitors):
+            print("{}.\t{}".format(i, monitor))
 
 
 
