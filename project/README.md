@@ -33,6 +33,9 @@ Need Python 2
 
 `$ python code.py`
 
+# Report
+
+Main report can be viewed in [Report.pdf](https://github.com/suniltheta/FSS17_group_R/blob/master/project/Report.pdf).
 
 ### Decision Tree for all dataset
 
