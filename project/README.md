@@ -22,6 +22,18 @@ To change dataset set different value in line 25 `set_dataset`.
 
 All the dataset used in this project are licensed under Creative Commons Attribution 4.0. You can find the datasets in [Ck Metrics](http://openscience.us/repo/defect/ck/)
 
+### To Run the program
+Need Python 2
+
+`$ git clone https://github.com/suniltheta/FSS17_group_R.git`
+
+`$ cd FSS17_group_R/project/`
+
+`$ pip install -r requirements.txt`
+
+`$ python code.py`
+
+
 ### Decision Tree for all dataset
 
 You can view all the decision tree visualization in [Decision Tree](https://github.com/suniltheta/FSS17_group_R/blob/master/project/Decision%20Tree.pdf) file
