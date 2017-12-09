@@ -33,6 +33,14 @@ Need Python 2
 
 `$ python code.py`
 
+### How to visualize the tree
+Once you run the program two file would be created. 
+
+1. tree.dot
+2. tree-un.dot
+
+`tree.dot` contains tuned decision tree visualization file which can be visualized at [webgraphviz.com](http://webgraphviz.com). `tree-un.dot` contains decision tree visualization for un tuned decision tree.
+
 # Report
 
 Main report can be viewed in [Report.pdf](https://github.com/suniltheta/FSS17_group_R/blob/master/project/Report.pdf).
