@@ -20,5 +20,7 @@ To change dataset set different value in line 25 `set_dataset`.
 | xalan | 9|
 
 
+All the dataset used in this project are licensed under Creative Commons Attribution 4.0. You can find the datasets in [Ck Metrics](http://openscience.us/repo/defect/ck/)
+
 # Presentation link
 [Presentation Link](http://tiny.cc/fss_proj_r)
